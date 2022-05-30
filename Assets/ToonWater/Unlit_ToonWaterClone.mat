@@ -32,9 +32,9 @@ Material:
     - _FoamDistance: 0.07
     - _FomaMaxDistance: 0.4
     - _FomaMinDistance: 0.03
-    - _NoistTint: 0.75
+    - _NoistTint: 0.81
     - _surfaceDistortionAmount: 0.23
     m_Colors:
-    - _DepthGradientDeep: {r: 0.0292809, g: 0.43617845, b: 0.8867924, a: 1}
+    - _DepthGradientDeep: {r: 0.08187969, g: 0.40140066, b: 0.754717, a: 1}
     - _DepthGradientShallow: {r: 0.3647059, g: 0.7783402, b: 0.9529412, a: 1}
     - _SurfaceNoiseScroll: {r: 0.02, g: 0.07, b: 0, a: 0}

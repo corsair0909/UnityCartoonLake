@@ -76,12 +76,16 @@
             fixed4 frag (v2f i) : SV_Target
             {
                 //UNITY_SAMPLE_DEPTH 取得r通道
+                //tex2Dproj = i.ScreenPos.xy/i.ScreenPos.w
                 float depth = UNITY_SAMPLE_DEPTH(tex2Dproj(_CameraDepthTexture,UNITY_PROJ_COORD(i.ScreenPos))); 
                 float LinearDepth = LinearEyeDepth(depth);//投影矩阵是非线性的，需要转换为线性深度
+                //关闭了深度写入，水面深度不保存在深度缓冲区，LinearDepth计算得出的是湖底的深度，
+                //i.ScreenPos.w = 水面上顶点的自身的深度
                 float depthDifference = LinearDepth - i.ScreenPos.w;
                 float WaterDepthDifference = saturate(depthDifference/_DepthMaxDistance);
                 float4 waterColor = lerp(_DepthGradientShallow,_DepthGradientDeep,WaterDepthDifference);
 
+                //将运动纹理值映射到[-1,1]
                 float2 distorSample = (tex2D(_SurfaceDistortion,i.distortUV).xy * 2 - 1) * _surfaceDistortionAmount;
                 float2 noiseUV = float2(i.NoiseUV.x + _Time.y * _SurfaceNoiseScroll.x + distorSample.x , 
                 i.NoiseUV.y+_Time.y * _SurfaceNoiseScroll.y+distorSample.y);
